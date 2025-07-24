@@ -1,0 +1,151 @@
+1  yum install httpd -y
+    2  systemctl start httpd
+    3  systemctl enable httpd
+    4  vim /var/www/html/index.html
+    5  yum install python3 -y
+    6  pip3 install flask boto3
+    7  pip install flask boto3
+    8  yum install pip3
+    9  yum install pip
+   10  pip install flask boto3
+   11  vim app.py
+   12  sudo netstat -tuln | grep 80
+   13  mkdir /opt/cloudwithvivek/
+   14  vim /opt/cloudwithvivek/app.py
+   15  ls
+   16  rm -rvf app.py
+   17  vim /var/www/html/index.html
+   18  sudo yum update -y
+   19  sudo yum install python3 git -y
+   20  pip3 install flask boto3
+   21  cd /opt/cloudwithvivek
+   22  sudo python3 app.py
+   23  docker login
+   24  docker image ls
+   25  docker push cloudwithvivek/private-repo:ubuntu-linux
+   26  docker tag ubuntu-linux cloudwithvivek/private-repo:test
+   27  docker tag ubuntu cloudwithvivek/private-repo:test
+   28  docker image ls
+   29  docker push cloudwithvivek/private-repo:test
+   30  docker image ls
+   31  docker login
+   32  docker image ls
+   33  docker tag ubuntu
+   34  docker tag ubuntu cloudwithvivek/myapp:ubuntu-linux
+   35  docker image ls
+   36  docker push cloudwithvivek/myapp:ubuntu-linux
+   37  ls
+   38  vim Dockerfile
+   39  docker image built -t vivek-image:1 .
+   40  docker image build -t vivek-image:1 .
+   41  docker image ls
+   42  docker container run -it --name satyaprakash vivek-image:1
+   43  docker ps
+   44  vim Dockerfile
+   45  docker image build -t vivek-image:2 .
+   46  docker container run -it --name new-container vivek-image:2
+   47  vim Dockerfile
+   48  docker image build -t prod:1 .
+   49  docker image ls
+   50  docker container run -it --name prod prod:1
+   51  docker image ls
+   52  init 0
+   53  ls
+   54  docker image ls
+   55  vim Dockerfile
+   56  docker image build -t cloud-image .
+   57  docker image ls
+   58  docker inspect cloud-image
+   59  docker container run -it --name c-12 cloud-image
+   60  ls
+   61  vim Dockerfile
+   62  docker image build -t cloud-image:2 .
+   63  docker image ls
+   64  docker container run -it --name c-13 cloud-image:2
+   65  ls
+   66  vim vivekfile
+   67  docker image build -t cloud-image:3 -f vivekfile .
+   68  docker image ls
+   69  docker container run -it cloud-image:3
+   70  docker ps
+   71  docker ps -a
+   72  docker container run -it cloud-image:3
+   73  rm -rvf vivekfile
+   74  ls
+   75  vim Dockerfile
+   76  pwd
+   77  vim devops.txt
+   78  docker image build -t vivek:1 .
+   79  docker image ls
+   80  vim Dockerfile
+   81  docker image build -t vivek:1 .
+   82  docker container run -it --name modi vivek:1
+   83  cat Dockerfile
+   84  vim linux.zip
+   85  ls
+   86  vim Dockerfile
+   87  docker image build -t modi:3 .
+   88  docker container run -it --name ujjhwal modi:3
+   89  vim Dockerfile
+   90  docker image ls
+   91  docker image build -t stag:1 .
+   92  docker container run -it --name stage stage:1
+   93  docker image ls
+   94  docker container run -it --name stage stag:1
+   95  vim Dockerfile
+   96  docker image build -t stag:2 .
+   97  docker container run -it --name stage-2 stag:2
+   98  ls
+   99  ld
+  100  ls
+  101  cat Dockerfile
+  102  docker container run -it --name hp1 hp
+  103  docker container run -it --name hp2 hp
+  104  init 0
+  105  ls
+  106  docker image ls
+  107  ls
+  108  docker image build -t dell .
+  109  docker image ls
+  110  docker image build -t dell .
+  111  docker image ls
+  112  docker rmi stag dell modi
+  113  docker rmi modi
+  114  docker ls
+  115  docker image ls
+  116  vim Dockerfile
+  117  ls
+  118  docker image build -t hp .
+  119  docker image ;s
+  120  docker image ls
+  121  docker container run -it --name hp1 hp
+  122  ls
+  123  vim Dockerfile
+  124  docker image build -t hp
+  125  docker image build -t hp .
+  126  history
+  127  docker image ls
+  128  docker image -f dangling=true
+  129  docker images -f dangling=true
+  130  docker images -a
+  131  docker image history
+  132  docker history
+  133  docker images -a
+  134  docker images -f dangling=true
+  135  docker images --no-trunc
+  136  cat Dockerfile
+  137  vim Dockerfile
+  138  ls
+  139  touch satyam.txt
+  140  docker container run -it --name delhi hp
+  141  docker ps -a
+  142  Vim Dockerfile
+  143  ls
+  144  vim Dockerfile
+  145  docker image build -t hp .
+  146  docker images -a
+  147  docker container run -it --name delhi-2 hp
+  148  docker images -a
+  149  docker images -f dangling=true
+  150  docker image build --no-cache -t hp .
+  151  docker images -a

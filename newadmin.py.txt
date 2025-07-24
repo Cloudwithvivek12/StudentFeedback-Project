@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+
+import boto3
+import cgi
+import matplotlib.pyplot as plt
+from collections import Counter
+import os
+
+print("Content-Type: text/html\n")
+
+# Connect to DynamoDB
+dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')
+table = dynamodb.Table('CloudWithVivekFeedback')
+
+# Fetch all records
+response = table.scan()
+items = response.get('Items', [])
+
+# Create pie chart: count feedbacks per course
+course_counts = Counter(item.get('course', 'Unknown') for item in items)
+
+# Generate pie chart image
+labels = list(course_counts.keys())
+sizes = list(course_counts.values())
+
+plt.figure(figsize=(6,6))
+plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
+plt.title('Feedback Distribution by Course')
+
+# Save image in /tmp directory (writable by CGI on AWS Lambda / Linux)
+img_path = "/tmp/feedback_pie.png"
+plt.savefig(img_path)
+plt.close()
+
+# Read image and encode in base64
+import base64
+with open(img_path, "rb") as image_file:
+    encoded_img = base64.b64encode(image_file.read()).decode('utf-8')
+
+# HTML output
+print(f"""
+<html>
+<head>
+    <title>Admin Dashboard - Feedbacks</title>
+    <style>
+        table {{ border-collapse: collapse; width: 80%; margin: 20px auto; }}
+        th, td {{ border: 1px solid #ccc; padding: 8px; text-align: left; }}
+        th {{ background-color: #f2f2f2; }}
+        h2, h3 {{ text-align: center; }}
+        .chart {{ text-align: center; margin-top: 40px; }}
+    </style>
+</head>
+<body>
+<h2>Feedback Dashboard - CloudWithVivek</h2>
+<table>
+<tr><th>Name</th><th>Course</th><th>Feedback</th><th>ID</th></tr>
+""")
+
+for item in items:
+    print(f"<tr><td>{item.get('name')}</td><td>{item.get('course')}</td><td>{item.get('feedback')}</td><td>{item.get('id')}</td></tr>")
+
+# Embed pie chart
+print(f"""
+</table>
+<div class="chart">
+    <h3>Feedback Distribution by Course</h3>
+    <img src="data:image/png;base64,{encoded_img}" alt="Feedback Pie Chart" />
+</div>
+</body>
+</html>
+""")
